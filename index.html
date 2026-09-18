@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Piano Allenamento · Marco</title>
 <style>
+/* ── PALETTE SPORT WHITE ── */
 :root{
-  --bg:#0f0f0f;--s1:#181818;--s2:#222;--s3:#2a2a2a;
-  --bd:#303030;--bd2:#3a3a3a;
-  --tx:#f0f0f0;--tx2:#aaa;--tx3:#666;
-  --run:#3b82f6;--run-d:#1e3a5f;--run-b:#0d2240;
-  --str:#a78bfa;--str-d:#2e1a4a;
-  --walk:#34d399;--walk-d:#0f2e1a;
-  --rest:#6b7280;--rest-d:#1a1f26;
-  --acc:#f0f0f0;--acc2:#fbbf24;
+  --bg:#f5f5f5;--s1:#ffffff;--s2:#f0f0f0;--s3:#e8e8e8;
+  --bd:#e0e0e0;--bd2:#d0d0d0;
+  --tx:#111111;--tx2:#555555;--tx3:#999999;
+  --run:#e65100;--run-d:#fff3e0;--run-b:#fff8f4;
+  --str:#6a1b9a;--str-d:#f3e5f5;
+  --walk:#1565c0;--walk-d:#e3f2fd;
+  --rest:#757575;--rest-d:#f5f5f5;
+  --acc:#2e7d32;--acc2:#e65100;
   --r:14px;--r2:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -21,133 +22,155 @@ html,body{height:100%;overscroll-behavior:none}
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;
   background:var(--bg);color:var(--tx);font-size:15px;line-height:1.5}
 
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;z-index:200;padding:40px 32px;
+  transition:opacity .4s ease,visibility .4s ease}
+#splash.hidden{opacity:0;visibility:hidden}
+.splash-icon{font-size:56px;margin-bottom:24px;line-height:1}
+.splash-title{font-size:28px;font-weight:700;color:#111;text-align:center;margin-bottom:8px;line-height:1.2}
+.splash-name{font-size:16px;color:#2e7d32;font-weight:600;margin-bottom:32px}
+.splash-quote{font-size:15px;color:#555;text-align:center;line-height:1.7;
+  max-width:280px;margin-bottom:48px;font-style:italic}
+.splash-btn{width:100%;max-width:280px;padding:16px;border-radius:14px;border:none;
+  background:#2e7d32;color:#fff;font-size:17px;font-weight:700;font-family:inherit;
+  cursor:pointer;letter-spacing:.01em;transition:transform .1s,background .1s}
+.splash-btn:active{transform:scale(.97);background:#1b5e20}
+.splash-phase{font-size:12px;color:#999;margin-top:16px;letter-spacing:.05em;text-transform:uppercase}
+
 /* ── LAYOUT ── */
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
-#header{padding:14px 16px 10px;border-bottom:1px solid var(--bd);background:var(--bg);z-index:20;flex-shrink:0}
-#daybar{flex-shrink:0;border-bottom:1px solid var(--bd)}
+#header{padding:14px 16px 10px;border-bottom:1px solid var(--bd);background:#fff;z-index:20;flex-shrink:0}
+#daybar{flex-shrink:0;border-bottom:1px solid var(--bd);background:#fff}
 #content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 100px}
-#footer{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--bd);
+#footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--bd);
   padding:10px 16px max(16px,env(safe-area-inset-bottom));z-index:20}
 
 /* ── HEADER ── */
 .app-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px}
 .phase-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .phase-row::-webkit-scrollbar{display:none}
-.pp{flex-shrink:0;padding:6px 14px;border-radius:99px;border:1px solid var(--bd2);
-  background:transparent;color:var(--tx3);font-size:12px;font-weight:600;font-family:inherit;
+.pp{flex-shrink:0;padding:7px 16px;border-radius:99px;border:1.5px solid var(--bd2);
+  background:#fff;color:var(--tx3);font-size:12px;font-weight:700;font-family:inherit;
   cursor:pointer;letter-spacing:.02em;transition:all .15s}
-.pp.active{background:var(--acc);color:#000;border-color:var(--acc)}
+.pp.active{background:#2e7d32;color:#fff;border-color:#2e7d32}
 .phase-desc{font-size:12px;color:var(--tx3);margin-top:8px;line-height:1.5;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 /* ── DAY BAR ── */
 .day-scroll{display:flex;gap:5px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
 .day-scroll::-webkit-scrollbar{display:none}
-.dc{flex-shrink:0;width:68px;background:var(--s1);border:1.5px solid var(--bd);
+.dc{flex-shrink:0;width:68px;background:#fff;border:1.5px solid var(--bd);
   border-radius:12px;padding:8px 4px 7px;cursor:pointer;text-align:center;transition:all .15s;position:relative}
-.dc.sel{border-color:var(--acc)}
+.dc.sel{border-color:#2e7d32;background:#f1f8f1}
 .dc-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);margin-bottom:3px}
 .dc-dot{width:7px;height:7px;border-radius:50%;margin:3px auto}
 .dc-type{font-size:9px;color:var(--tx3);margin-top:3px;line-height:1.2}
-.dc-done{position:absolute;top:4px;right:5px;width:7px;height:7px;background:#22c55e;border-radius:50%}
+.dc-done{position:absolute;top:4px;right:5px;width:7px;height:7px;background:#2e7d32;border-radius:50%}
 
-/* ── TRACKER CARD ── */
-.tracker{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:14px}
+/* ── TRACKER ── */
+.tracker{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:14px}
 .tracker-title{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);margin-bottom:10px}
-.tracker-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.tw{text-align:center}
-.tw-label{font-size:9px;color:var(--tx3);margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em}
-.tw-dot{width:28px;height:28px;border-radius:50%;background:var(--s3);border:1.5px solid var(--bd2);
-  margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:all .2s}
-.tw-dot.done{background:#22c55e;border-color:#22c55e;color:#000;font-weight:700}
-.tw-dot.today{border-color:var(--acc)}
-.tracker-stats{display:flex;gap:8px;margin-top:12px}
+.tracker-stats{display:flex;gap:8px;margin-top:4px}
 .tstat{flex:1;background:var(--s2);border-radius:var(--r2);padding:8px 10px;text-align:center}
 .tstat-val{font-size:18px;font-weight:700;margin-bottom:1px}
 .tstat-lbl{font-size:10px;color:var(--tx3)}
 
 /* ── CARDIO CARD ── */
-.ccard{border-radius:var(--r);padding:14px;margin-bottom:12px;border:1px solid transparent}
-.ccard.run{background:var(--run-b);border-color:var(--run-d)}
-.ccard.walk{background:var(--walk-d);border-color:#0f3d24}
+.ccard{border-radius:var(--r);padding:14px;margin-bottom:12px;border:1.5px solid transparent}
+.ccard.run{background:var(--run-b);border-color:#ffccbc}
+.ccard.walk{background:var(--walk-d);border-color:#bbdefb}
 .ctag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
 .ctag.run{color:var(--run)}.ctag.walk{color:var(--walk)}
 .cmetrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
-.cm{background:rgba(255,255,255,.06);border-radius:8px;padding:7px 10px}
+.cm{background:rgba(0,0,0,.04);border-radius:8px;padding:7px 10px}
 .cm-l{font-size:10px;color:var(--tx3);margin-bottom:1px}
-.cm-v{font-size:13px;font-weight:600}
+.cm-v{font-size:13px;font-weight:700;color:var(--tx)}
 .cnote{font-size:12px;color:var(--tx2);line-height:1.65;margin-bottom:8px}
-.cintv{background:rgba(255,255,255,.04);border-radius:8px;overflow:hidden}
+.cintv{background:rgba(0,0,0,.04);border-radius:8px;overflow:hidden}
 .ci{display:flex;justify-content:space-between;padding:6px 10px;
-  border-bottom:1px solid rgba(255,255,255,.06);font-size:12px}
+  border-bottom:1px solid rgba(0,0,0,.06);font-size:12px}
 .ci:last-child{border-bottom:none}
-.ci-l{color:var(--tx3)}.ci-v{font-weight:600}
+.ci-l{color:var(--tx3)}.ci-v{font-weight:600;color:var(--tx)}
 
 /* ── SECTION TITLE ── */
 .sec-title{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);margin:0 0 8px}
 
 /* ── EXERCISE CARD ── */
-.ecard{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
-.ecard-header{display:flex;align-items:stretch;cursor:pointer;padding:13px 13px 13px 13px;gap:12px}
-.esvg{flex-shrink:0;width:72px;height:72px;background:var(--s2);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px}
+.ecard{background:#fff;border:1px solid var(--bd);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.ecard.open{border-color:#bdbdbd}
+.ecard-header{display:flex;align-items:center;cursor:pointer;padding:13px;gap:12px}
+.esvg{flex-shrink:0;width:52px;height:52px;background:var(--s2);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:26px}
 .einfo{flex:1;min-width:0}
-.ename{font-size:14px;font-weight:600;line-height:1.3;margin-bottom:4px}
-.emeta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
-.etag{font-size:11px;padding:2px 8px;border-radius:99px}
-.etag.sets{background:var(--str-d);color:var(--str)}
-.etag.muscles{background:var(--s3);color:var(--tx3)}
-.echevron{flex-shrink:0;color:var(--tx3);font-size:16px;align-self:center;transition:transform .2s}
+.ename{font-size:14px;font-weight:600;line-height:1.3;margin-bottom:4px;color:var(--tx)}
+.emeta{display:flex;gap:5px;flex-wrap:wrap}
+.etag{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:600}
+.etag.sets{background:#f3e5f5;color:#6a1b9a}
+.etag.muscles{background:var(--s2);color:var(--tx3)}
+.echevron{flex-shrink:0;color:var(--tx3);font-size:18px;align-self:center;transition:transform .2s}
 .ecard.open .echevron{transform:rotate(180deg)}
 
 /* ── EXERCISE BODY ── */
-.ebody{display:none;padding:0 13px 13px;border-top:1px solid var(--bd)}
+.ebody{display:none;padding:0 13px 14px;border-top:1px solid var(--bd)}
 .ecard.open .ebody{display:block}
-.ehow{font-size:13px;color:var(--tx2);line-height:1.7;margin:10px 0 12px}
+.ehow{font-size:13px;color:var(--tx2);line-height:1.75;margin:12px 0 14px}
 
-/* ── SERIES CHECKLIST ── */
+/* ── SERIES ── */
 .series-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.ser-btn{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--bd2);
+.ser-btn{width:44px;height:44px;border-radius:10px;border:1.5px solid var(--bd2);
   background:var(--s2);color:var(--tx3);font-size:12px;font-weight:700;font-family:inherit;
   cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:all .15s}
 .ser-btn span{font-size:9px;font-weight:400;margin-top:1px}
-.ser-btn.done{background:#166534;border-color:#22c55e;color:#86efac}
-.ser-btn.done::after{content:'✓';font-size:14px}
+.ser-btn.done{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32}
+.ser-btn.done::after{content:'✓';font-size:16px;font-weight:700}
 
 /* ── TIMER ── */
-.timer-btn{width:100%;padding:10px;border-radius:var(--r2);border:none;font-family:inherit;
-  font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
-.timer-btn.idle{background:var(--s3);color:var(--tx2)}
-.timer-btn.running{background:#1e3a5f;color:var(--run);animation:pulse 1s ease-in-out infinite}
-.timer-btn.done-t{background:#166534;color:#86efac}
+.timer-btn{width:100%;padding:11px;border-radius:var(--r2);border:1.5px solid var(--bd2);
+  background:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;color:var(--tx2)}
+.timer-btn.running{background:#fff3e0;border-color:#e65100;color:#e65100;animation:pulse 1s ease-in-out infinite}
+.timer-btn.done-t{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
 
 /* ── REST CARD ── */
-.rest-card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
-  padding:20px;text-align:center;color:var(--tx3);font-size:13px;line-height:1.7}
+.rest-card{background:#fff;border:1px solid var(--bd);border-radius:var(--r);
+  padding:24px;text-align:center;color:var(--tx3);font-size:14px;line-height:1.7}
 
 /* ── COMPLETE BTN ── */
-.complete-btn{width:100%;padding:14px;border-radius:var(--r);border:none;font-family:inherit;
-  font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
-.complete-btn.inactive{background:var(--s2);color:var(--tx3)}
-.complete-btn.active{background:#166534;color:#86efac}
-.complete-btn.completed{background:#14532d;color:#4ade80}
+.complete-btn{width:100%;padding:15px;border-radius:var(--r);border:none;font-family:inherit;
+  font-size:15px;font-weight:700;cursor:pointer;transition:all .15s}
+.complete-btn.inactive{background:var(--s2);color:var(--tx3);border:1.5px solid var(--bd)}
+.complete-btn.active{background:#2e7d32;color:#fff}
+.complete-btn.completed{background:#e8f5e9;color:#2e7d32;border:1.5px solid #2e7d32}
 
-/* ── NAV BTNs ── */
+/* ── NAV BTNS ── */
 .nav-row{display:flex;gap:8px}
-.nb{flex:1;padding:11px;border-radius:var(--r2);border:1px solid var(--bd2);
-  background:var(--s1);color:var(--tx);font-family:inherit;font-size:14px;font-weight:500;cursor:pointer}
-.nb:disabled{opacity:.25}
+.nb{flex:1;padding:12px;border-radius:var(--r2);border:1.5px solid var(--bd2);
+  background:#fff;color:var(--tx);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.nb:disabled{opacity:.3}
 
 /* ── TOAST ── */
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:#166534;color:#86efac;padding:8px 16px;border-radius:99px;
+  background:#2e7d32;color:#fff;padding:8px 18px;border-radius:99px;
   font-size:13px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;z-index:100;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
-<div id="app">
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-icon">🏃</div>
+  <div class="splash-title">Ciao Marco,<br>pronto ad allenarti?</div>
+  <div class="splash-name">Il tuo piano personale</div>
+  <div class="splash-quote" id="splashQuote"></div>
+  <button class="splash-btn" onclick="enterApp()">Inizia l'allenamento →</button>
+  <div class="splash-phase" id="splashPhase"></div>
+</div>
+
+<!-- APP PRINCIPALE -->
+<div id="app" style="visibility:hidden">
   <div id="header">
     <div class="app-label">Piano Allenamento · Marco</div>
     <div class="phase-row" id="phaseNav"></div>
@@ -165,35 +188,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-s
 <div id="toast"></div>
 
 <script>
-// ─── IMAGE LIBRARY (Wikipedia — GIF animate, licenza libera) ─────────────────
-// URL diretti alle GIF su en.wikipedia.org — funzionano nel browser su GitHub Pages
-const IMGS = {
-  squat:         'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
-  pushup:        'https://en.wikipedia.org/wiki/Special:FilePath/Pushup_wbs.gif',
-  lunge:         'https://en.wikipedia.org/wiki/Special:FilePath/Lunges_wbs.gif',
-  glute_bridge:  'https://en.wikipedia.org/wiki/Special:FilePath/Bridge_wbs.gif',
-  plank:         'https://en.wikipedia.org/wiki/Special:FilePath/Plank_wbs.gif',
-  pike_pushup:   'https://en.wikipedia.org/wiki/Special:FilePath/Pike-push-up_wbs.gif',
-  superman:      'https://en.wikipedia.org/wiki/Special:FilePath/Superman_wbs.gif',
-  calf:          'https://en.wikipedia.org/wiki/Special:FilePath/Calf-raises_wbs.gif',
-  bird_dog:      'https://en.wikipedia.org/wiki/Special:FilePath/Bird-dog_wbs.gif',
-  dip:           'https://en.wikipedia.org/wiki/Special:FilePath/Dips_wbs.gif',
-  reverse_snow:  'https://en.wikipedia.org/wiki/Special:FilePath/Touchankles_wbs.gif',
-  hollow:        'https://en.wikipedia.org/wiki/Special:FilePath/Situp_wbs.gif',
-  leg_raise:     'https://en.wikipedia.org/wiki/Special:FilePath/Leg-raises_wbs.gif',
-  squat_jump:    'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
-  hip_thrust:    'https://en.wikipedia.org/wiki/Special:FilePath/Bridge_wbs.gif',
-  nordic:        'https://en.wikipedia.org/wiki/Special:FilePath/Situp_wbs.gif',
-  archer_pushup: 'https://en.wikipedia.org/wiki/Special:FilePath/Pushup_wbs.gif',
-  circuit:       'https://en.wikipedia.org/wiki/Special:FilePath/Burpee_wbs.gif',
-  windshield:    'https://en.wikipedia.org/wiki/Special:FilePath/Touchankles_wbs.gif',
-  bulgarian:     'https://en.wikipedia.org/wiki/Special:FilePath/Lunges_wbs.gif',
-  iyt:           'https://en.wikipedia.org/wiki/Special:FilePath/Superman_wbs.gif',
-  step_up:       'https://en.wikipedia.org/wiki/Special:FilePath/Lunges_wbs.gif',
-  stretch:       'https://en.wikipedia.org/wiki/Special:FilePath/Touchankles_wbs.gif',
-  run_walk:      'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
-  walk_icon:     'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
-  default_ex:    'https://en.wikipedia.org/wiki/Special:FilePath/Pushup_wbs.gif'
+// ─── EMOJI MAP (visibili sempre, nessuna dipendenza esterna) ─────────────────
+const EMOJI={
+  squat:'🦵',pushup:'💪',lunge:'🦵',glute_bridge:'🍑',plank:'🧱',
+  pike_pushup:'🔼',superman:'🦸',calf:'🦵',bird_dog:'🐾',dip:'💺',
+  reverse_snow:'❄️',hollow:'⚡',leg_raise:'📐',squat_jump:'⬆️',
+  hip_thrust:'🍑',nordic:'🏋️',archer_pushup:'🏹',circuit:'🔥',
+  windshield:'🌀',bulgarian:'🦵',iyt:'🦅',step_up:'🪜',
+  stretch:'🧘',run_walk:'🏃',walk_icon:'🚶',default_ex:'💪'
 };
 
 // SVG fallback (usato solo se l'immagine non carica)
@@ -427,7 +429,34 @@ const SVG = {
   </svg>`
 };
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
+// ─── WIKIPEDIA LINKS ──────────────────────────────────────────────────────────
+const WIKI={
+  squat:         'https://it.wikipedia.org/wiki/Squat_(esercizio)',
+  pushup:        'https://it.wikipedia.org/wiki/Flessione_sulle_braccia',
+  lunge:         'https://en.wikipedia.org/wiki/Lunge_(exercise)',
+  glute_bridge:  'https://en.wikipedia.org/wiki/Glute_bridge',
+  plank:         'https://it.wikipedia.org/wiki/Plank_(esercizio)',
+  pike_pushup:   'https://en.wikipedia.org/wiki/Pike_push-up',
+  superman:      'https://en.wikipedia.org/wiki/Superman_(exercise)',
+  calf:          'https://en.wikipedia.org/wiki/Calf_raise',
+  bird_dog:      'https://en.wikipedia.org/wiki/Bird_dog_(exercise)',
+  dip:           'https://it.wikipedia.org/wiki/Dip_(esercizio)',
+  reverse_snow:  'https://en.wikipedia.org/wiki/Snow_angel_(exercise)',
+  hollow:        'https://en.wikipedia.org/wiki/Hollow_body_position',
+  leg_raise:     'https://en.wikipedia.org/wiki/Leg_raise',
+  squat_jump:    'https://en.wikipedia.org/wiki/Squat_jump',
+  hip_thrust:    'https://en.wikipedia.org/wiki/Hip_thrust',
+  nordic:        'https://en.wikipedia.org/wiki/Nordic_hamstring_curl',
+  archer_pushup: 'https://en.wikipedia.org/wiki/Push-up#Variations',
+  circuit:       'https://en.wikipedia.org/wiki/Burpee_(exercise)',
+  windshield:    'https://en.wikipedia.org/wiki/Windshield_wiper_(exercise)',
+  bulgarian:     'https://en.wikipedia.org/wiki/Bulgarian_split_squat',
+  iyt:           'https://en.wikipedia.org/wiki/Superman_(exercise)',
+  step_up:       'https://en.wikipedia.org/wiki/Step_up_(exercise)',
+  stretch:       'https://en.wikipedia.org/wiki/Hip_flexor',
+  row:           'https://en.wikipedia.org/wiki/Inverted_row',
+  default_ex:    'https://en.wikipedia.org/wiki/Calisthenics'
+};
 const phases=[
 {label:'Fase 1',weeks:'Sett. 1–4',
  desc:'Fondamenta — Full body 3×/sett + camminata. Focus sulla forma. Recupero 60–75 sec tra le serie.',
@@ -700,12 +729,7 @@ function renderTracker(){
 
 function renderExercise(ex,pi,di,ei){
   const key=`${pi}-${di}-${ei}`;
-  // Usa immagine reale Wikimedia, con fallback all'SVG se non carica
-  const imgUrl=IMGS[ex.svg]||IMGS.default_ex;
-  const svgFallback=SVG[ex.svg]||SVG.default_ex;
-  const imgHtml=`<img src="${imgUrl}" alt="${ex.n}" style="width:68px;height:68px;object-fit:contain;"
-    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div style="display:none;width:68px;height:68px;align-items:center;justify-content:center">${svgFallback}</div>`;
+  const emoji=EMOJI[ex.svg]||EMOJI.default_ex;
   const sd=serDone[pi][di][ei]||[];
   const sets=ex.sets;
   const allDone=sd.filter(Boolean).length>=sets;
@@ -723,11 +747,18 @@ function renderExercise(ex,pi,di,ei){
   }
 
   const recSec=ex.rec||60;
+  const wikiUrl=WIKI[ex.svg]||WIKI.default_ex;
+  const wikiLink=`<a href="${wikiUrl}" target="_blank" rel="noopener"
+    style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;
+    color:#1565c0;text-decoration:none;padding:7px 12px;border-radius:8px;
+    background:#e3f2fd;border:1px solid #bbdefb;margin-top:2px">
+    📖 Vedi esercizio su Wikipedia ↗
+  </a>`;
   const timerLabel=`⏱ Recupero ${recSec}s`;
 
   return`<div class="ecard" id="ec-${key}">
     <div class="ecard-header" onclick="toggleEx('${key}')">
-      <div class="esvg">${imgHtml}</div>
+      <div class="esvg">${emoji}</div>
       <div class="einfo">
         <div class="ename">${ex.n}</div>
         <div class="emeta">
@@ -739,7 +770,8 @@ function renderExercise(ex,pi,di,ei){
     </div>
     <div class="ebody">
       <div class="ehow">${ex.h}</div>
-      <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);margin-bottom:6px">Spunta le serie completate</div>
+      ${wikiLink}
+      <div style="margin-top:12px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);margin-bottom:6px">Spunta le serie completate</div>
       <div class="series-row">${serbtns}</div>
       ${recSec>0?`<button class="timer-btn idle" id="tb-${key}" onclick="startTimer(${recSec},'${key}',this)">⏱ Avvia recupero (${recSec}s)</button>`:''}
     </div>
@@ -835,8 +867,34 @@ function goAdj(dir){
   renderDayBar();renderMain();
 }
 
+// ─── SPLASH SCREEN ───────────────────────────────────────────────────────────
+const QUOTES=[
+  '"La disciplina è fare quello che devi fare, anche quando non ne hai voglia."',
+  '"Ogni allenamento è un mattone. La casa la costruisci tu."',
+  '"Non devi essere forte per cominciare, ma devi cominciare per diventare forte."',
+  '"Il corpo ottiene ciò che la mente crede."',
+  '"Tra un anno guarderai indietro e sarai felice di aver iniziato oggi."',
+  '"La fatica di oggi è la forza di domani."',
+  '"Non smettere quando sei stanco. Smetti quando hai finito."',
+  '"Ogni rep conta. Ogni sessione conta. Ogni giorno conta."',
+];
+
+function initSplash(){
+  const q=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  document.getElementById('splashQuote').textContent=q;
+  const phaseNames=['Fase 1 — Fondamenta','Fase 2 — Intensità','Fase 3 — Consolidamento'];
+  const done=completed.flat().filter(Boolean).length;
+  const total=completed.flat().length;
+  document.getElementById('splashPhase').textContent=`${phaseNames[cP]} · ${done}/${total} sessioni completate`;
+}
+
+function enterApp(){
+  document.getElementById('splash').classList.add('hidden');
+  document.getElementById('app').style.visibility='visible';
+}
+
 // ─── INIT ────────────────────────────────────────────────────────────────────
-renderNav();renderDayBar();renderMain();
+renderNav();renderDayBar();renderMain();initSplash();
 </script>
 </body>
 </html>
