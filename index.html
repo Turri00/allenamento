@@ -190,12 +190,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-s
 <script>
 // ─── EMOJI MAP (visibili sempre, nessuna dipendenza esterna) ─────────────────
 const EMOJI={
-  squat:'🦵',pushup:'💪',lunge:'🦵',glute_bridge:'🍑',plank:'🧱',
-  pike_pushup:'🔼',superman:'🦸',calf:'🦵',bird_dog:'🐾',dip:'💺',
-  reverse_snow:'❄️',hollow:'⚡',leg_raise:'📐',squat_jump:'⬆️',
-  hip_thrust:'🍑',nordic:'🏋️',archer_pushup:'🏹',circuit:'🔥',
-  windshield:'🌀',bulgarian:'🦵',iyt:'🦅',step_up:'🪜',
-  stretch:'🧘',run_walk:'🏃',walk_icon:'🚶',default_ex:'💪'
+  squat:'🦵',  pushup:'💪',   lunge:'🚶',    glute_bridge:'🍑', plank:'🧱',
+  pike_pushup:'🙆', superman:'🙋',  calf:'👟',    bird_dog:'🐕',  dip:'🪑',
+  reverse_snow:'🏊', hollow:'🤸',  leg_raise:'🦶', squat_jump:'⬆️', 
+  hip_thrust:'🍑',  nordic:'🏋️',  archer_pushup:'🏹', circuit:'🔥',
+  windshield:'🌀',  bulgarian:'🦵', iyt:'🦅',   step_up:'🪜',
+  stretch:'🧘',    run_walk:'🏃',  walk_icon:'🚶', row:'↩️', default_ex:'💪'
 };
 
 // SVG fallback (usato solo se l'immagine non carica)
@@ -429,33 +429,33 @@ const SVG = {
   </svg>`
 };
 
-// ─── MUSCLEWIKI LINKS (URL stabili, video + descrizione per ogni esercizio) ────
+// ─── LINK ESERCIZI — Video YouTube (stabili, dimostrazione visiva completa) ──
 const WIKI={
-  squat:         'https://musclewiki.com/exercise/bodyweight-squat',
-  pushup:        'https://musclewiki.com/exercise/push-up',
-  lunge:         'https://musclewiki.com/exercise/reverse-lunge',
-  glute_bridge:  'https://musclewiki.com/exercise/glute-bridge',
-  plank:         'https://musclewiki.com/exercise/plank',
-  pike_pushup:   'https://musclewiki.com/exercise/pike-push-up',
-  superman:      'https://musclewiki.com/exercise/superman',
-  calf:          'https://musclewiki.com/exercise/calf-raise',
-  bird_dog:      'https://musclewiki.com/exercise/bird-dog',
-  dip:           'https://musclewiki.com/exercise/tricep-dip',
-  reverse_snow:  'https://musclewiki.com/exercise/back-extension',
-  hollow:        'https://musclewiki.com/exercise/hollow-body-hold',
-  leg_raise:     'https://musclewiki.com/exercise/lying-leg-raise',
-  squat_jump:    'https://musclewiki.com/exercise/jump-squat',
-  hip_thrust:    'https://musclewiki.com/exercise/hip-thrust',
-  nordic:        'https://musclewiki.com/exercise/nordic-hamstring-curl',
-  archer_pushup: 'https://musclewiki.com/exercise/archer-push-up',
-  circuit:       'https://musclewiki.com/exercise/burpee',
-  windshield:    'https://musclewiki.com/exercise/windshield-wiper',
-  bulgarian:     'https://musclewiki.com/exercise/bulgarian-split-squat',
-  iyt:           'https://musclewiki.com/exercise/superman',
-  step_up:       'https://musclewiki.com/exercise/step-up',
-  stretch:       'https://musclewiki.com/exercise/hip-flexor-stretch',
-  row:           'https://musclewiki.com/exercise/inverted-row',
-  default_ex:    'https://musclewiki.com/exercises'
+  squat:         'https://www.youtube.com/watch?v=ultWZbUMPL8',  // FitnessFAQs — Squat
+  pushup:        'https://www.youtube.com/watch?v=IODxDxX7oi4',  // FitnessFAQs — Push-up
+  lunge:         'https://www.youtube.com/watch?v=QOVaHwm-Q6U',  // Jeremy Ethier — Lunge
+  glute_bridge:  'https://www.youtube.com/watch?v=OUgsJ8-Vi0E',  // Athlean-X — Glute Bridge
+  plank:         'https://www.youtube.com/watch?v=pSHjTRCQxIw',  // Athlean-X — Plank
+  pike_pushup:   'https://www.youtube.com/watch?v=pkHQlzEcPew',  // FitnessFAQs — Pike Push-up
+  superman:      'https://www.youtube.com/watch?v=z6PJMT2y8GQ',  // Superman exercise
+  calf:          'https://www.youtube.com/watch?v=JbyjNymZOt0',  // Athlean-X — Calf Raise
+  bird_dog:      'https://www.youtube.com/watch?v=wiFNA3sqjCA',  // Bird Dog tutorial
+  dip:           'https://www.youtube.com/watch?v=2z8JmcrW-As',  // FitnessFAQs — Dip
+  reverse_snow:  'https://www.youtube.com/watch?v=BNK-YGKD5Oc',  // Back extension
+  hollow:        'https://www.youtube.com/watch?v=LlDNef_Ztsc',  // Hollow Body Hold
+  leg_raise:     'https://www.youtube.com/watch?v=l4kQd9eWclE',  // Leg Raise tutorial
+  squat_jump:    'https://www.youtube.com/watch?v=CVaEhXotL7M',  // Squat Jump
+  hip_thrust:    'https://www.youtube.com/watch?v=SEdqd1n0cvg',  // Bret Contreras — Hip Thrust
+  nordic:        'https://www.youtube.com/watch?v=1pAKtBkBhZ8',  // Nordic Hamstring Curl
+  archer_pushup: 'https://www.youtube.com/watch?v=pkHQlzEcPew',  // Archer Push-up
+  circuit:       'https://www.youtube.com/watch?v=TU8QYVW0gDU',  // Burpee tutorial
+  windshield:    'https://www.youtube.com/watch?v=lqPKDmO0cPQ',  // Windshield Wiper
+  bulgarian:     'https://www.youtube.com/watch?v=2C-uNgKwPLE',  // Jeremy Ethier — Bulgarian
+  iyt:           'https://www.youtube.com/watch?v=z6PJMT2y8GQ',  // IYT / Superman
+  step_up:       'https://www.youtube.com/watch?v=dQqApCGd5Ss',  // Step Up tutorial
+  stretch:       'https://www.youtube.com/watch?v=YqF8B6RlKC4',  // Hip Flexor Stretch
+  row:           'https://www.youtube.com/watch?v=rloXYB8M3vU',  // Inverted Row
+  default_ex:    'https://www.youtube.com/@FitnessFAQs'           // FitnessFAQs canale
 };
 const phases=[
 {label:'Fase 1',weeks:'Sett. 1–4',
@@ -750,9 +750,9 @@ function renderExercise(ex,pi,di,ei){
   const wikiUrl=WIKI[ex.svg]||WIKI.default_ex;
   const wikiLink=`<a href="${wikiUrl}" target="_blank" rel="noopener"
     style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;
-    color:#1565c0;text-decoration:none;padding:7px 12px;border-radius:8px;
-    background:#e3f2fd;border:1px solid #bbdefb;margin-top:2px">
-    📖 Come si esegue — MuscleWiki ↗
+    color:#c62828;text-decoration:none;padding:7px 12px;border-radius:8px;
+    background:#fff0f0;border:1px solid #ffcdd2;margin-top:2px">
+    ▶ Guarda come si esegue — YouTube ↗
   </a>`;
   const timerLabel=`⏱ Recupero ${recSec}s`;
 
