@@ -429,33 +429,33 @@ const SVG = {
   </svg>`
 };
 
-// ─── WIKIPEDIA LINKS ──────────────────────────────────────────────────────────
+// ─── MUSCLEWIKI LINKS (URL stabili, video + descrizione per ogni esercizio) ────
 const WIKI={
-  squat:         'https://it.wikipedia.org/wiki/Squat_(esercizio)',
-  pushup:        'https://it.wikipedia.org/wiki/Flessione_sulle_braccia',
-  lunge:         'https://en.wikipedia.org/wiki/Lunge_(exercise)',
-  glute_bridge:  'https://en.wikipedia.org/wiki/Glute_bridge',
-  plank:         'https://it.wikipedia.org/wiki/Plank_(esercizio)',
-  pike_pushup:   'https://en.wikipedia.org/wiki/Pike_push-up',
-  superman:      'https://en.wikipedia.org/wiki/Superman_(exercise)',
-  calf:          'https://en.wikipedia.org/wiki/Calf_raise',
-  bird_dog:      'https://en.wikipedia.org/wiki/Bird_dog_(exercise)',
-  dip:           'https://it.wikipedia.org/wiki/Dip_(esercizio)',
-  reverse_snow:  'https://en.wikipedia.org/wiki/Snow_angel_(exercise)',
-  hollow:        'https://en.wikipedia.org/wiki/Hollow_body_position',
-  leg_raise:     'https://en.wikipedia.org/wiki/Leg_raise',
-  squat_jump:    'https://en.wikipedia.org/wiki/Squat_jump',
-  hip_thrust:    'https://en.wikipedia.org/wiki/Hip_thrust',
-  nordic:        'https://en.wikipedia.org/wiki/Nordic_hamstring_curl',
-  archer_pushup: 'https://en.wikipedia.org/wiki/Push-up#Variations',
-  circuit:       'https://en.wikipedia.org/wiki/Burpee_(exercise)',
-  windshield:    'https://en.wikipedia.org/wiki/Windshield_wiper_(exercise)',
-  bulgarian:     'https://en.wikipedia.org/wiki/Bulgarian_split_squat',
-  iyt:           'https://en.wikipedia.org/wiki/Superman_(exercise)',
-  step_up:       'https://en.wikipedia.org/wiki/Step_up_(exercise)',
-  stretch:       'https://en.wikipedia.org/wiki/Hip_flexor',
-  row:           'https://en.wikipedia.org/wiki/Inverted_row',
-  default_ex:    'https://en.wikipedia.org/wiki/Calisthenics'
+  squat:         'https://musclewiki.com/exercise/bodyweight-squat',
+  pushup:        'https://musclewiki.com/exercise/push-up',
+  lunge:         'https://musclewiki.com/exercise/reverse-lunge',
+  glute_bridge:  'https://musclewiki.com/exercise/glute-bridge',
+  plank:         'https://musclewiki.com/exercise/plank',
+  pike_pushup:   'https://musclewiki.com/exercise/pike-push-up',
+  superman:      'https://musclewiki.com/exercise/superman',
+  calf:          'https://musclewiki.com/exercise/calf-raise',
+  bird_dog:      'https://musclewiki.com/exercise/bird-dog',
+  dip:           'https://musclewiki.com/exercise/tricep-dip',
+  reverse_snow:  'https://musclewiki.com/exercise/back-extension',
+  hollow:        'https://musclewiki.com/exercise/hollow-body-hold',
+  leg_raise:     'https://musclewiki.com/exercise/lying-leg-raise',
+  squat_jump:    'https://musclewiki.com/exercise/jump-squat',
+  hip_thrust:    'https://musclewiki.com/exercise/hip-thrust',
+  nordic:        'https://musclewiki.com/exercise/nordic-hamstring-curl',
+  archer_pushup: 'https://musclewiki.com/exercise/archer-push-up',
+  circuit:       'https://musclewiki.com/exercise/burpee',
+  windshield:    'https://musclewiki.com/exercise/windshield-wiper',
+  bulgarian:     'https://musclewiki.com/exercise/bulgarian-split-squat',
+  iyt:           'https://musclewiki.com/exercise/superman',
+  step_up:       'https://musclewiki.com/exercise/step-up',
+  stretch:       'https://musclewiki.com/exercise/hip-flexor-stretch',
+  row:           'https://musclewiki.com/exercise/inverted-row',
+  default_ex:    'https://musclewiki.com/exercises'
 };
 const phases=[
 {label:'Fase 1',weeks:'Sett. 1–4',
@@ -752,7 +752,7 @@ function renderExercise(ex,pi,di,ei){
     style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;
     color:#1565c0;text-decoration:none;padding:7px 12px;border-radius:8px;
     background:#e3f2fd;border:1px solid #bbdefb;margin-top:2px">
-    📖 Vedi esercizio su Wikipedia ↗
+    📖 Come si esegue — MuscleWiki ↗
   </a>`;
   const timerLabel=`⏱ Recupero ${recSec}s`;
 
