@@ -89,8 +89,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-s
 /* ── EXERCISE CARD ── */
 .ecard{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
 .ecard-header{display:flex;align-items:stretch;cursor:pointer;padding:13px 13px 13px 13px;gap:12px}
-.esvg{flex-shrink:0;width:64px;height:64px;background:var(--s2);border-radius:10px;
-  display:flex;align-items:center;justify-content:center}
+.esvg{flex-shrink:0;width:72px;height:72px;background:var(--s2);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px}
 .einfo{flex:1;min-width:0}
 .ename{font-size:14px;font-weight:600;line-height:1.3;margin-bottom:4px}
 .emeta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
@@ -165,7 +165,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-s
 <div id="toast"></div>
 
 <script>
-// ─── SVG LIBRARY ─────────────────────────────────────────────────────────────
+// ─── IMAGE LIBRARY (Wikipedia — GIF animate, licenza libera) ─────────────────
+// URL diretti alle GIF su en.wikipedia.org — funzionano nel browser su GitHub Pages
+const IMGS = {
+  squat:         'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
+  pushup:        'https://en.wikipedia.org/wiki/Special:FilePath/Pushup_wbs.gif',
+  lunge:         'https://en.wikipedia.org/wiki/Special:FilePath/Lunges_wbs.gif',
+  glute_bridge:  'https://en.wikipedia.org/wiki/Special:FilePath/Bridge_wbs.gif',
+  plank:         'https://en.wikipedia.org/wiki/Special:FilePath/Plank_wbs.gif',
+  pike_pushup:   'https://en.wikipedia.org/wiki/Special:FilePath/Pike-push-up_wbs.gif',
+  superman:      'https://en.wikipedia.org/wiki/Special:FilePath/Superman_wbs.gif',
+  calf:          'https://en.wikipedia.org/wiki/Special:FilePath/Calf-raises_wbs.gif',
+  bird_dog:      'https://en.wikipedia.org/wiki/Special:FilePath/Bird-dog_wbs.gif',
+  dip:           'https://en.wikipedia.org/wiki/Special:FilePath/Dips_wbs.gif',
+  reverse_snow:  'https://en.wikipedia.org/wiki/Special:FilePath/Touchankles_wbs.gif',
+  hollow:        'https://en.wikipedia.org/wiki/Special:FilePath/Situp_wbs.gif',
+  leg_raise:     'https://en.wikipedia.org/wiki/Special:FilePath/Leg-raises_wbs.gif',
+  squat_jump:    'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
+  hip_thrust:    'https://en.wikipedia.org/wiki/Special:FilePath/Bridge_wbs.gif',
+  nordic:        'https://en.wikipedia.org/wiki/Special:FilePath/Situp_wbs.gif',
+  archer_pushup: 'https://en.wikipedia.org/wiki/Special:FilePath/Pushup_wbs.gif',
+  circuit:       'https://en.wikipedia.org/wiki/Special:FilePath/Burpee_wbs.gif',
+  windshield:    'https://en.wikipedia.org/wiki/Special:FilePath/Touchankles_wbs.gif',
+  bulgarian:     'https://en.wikipedia.org/wiki/Special:FilePath/Lunges_wbs.gif',
+  iyt:           'https://en.wikipedia.org/wiki/Special:FilePath/Superman_wbs.gif',
+  step_up:       'https://en.wikipedia.org/wiki/Special:FilePath/Lunges_wbs.gif',
+  stretch:       'https://en.wikipedia.org/wiki/Special:FilePath/Touchankles_wbs.gif',
+  run_walk:      'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
+  walk_icon:     'https://en.wikipedia.org/wiki/Special:FilePath/Squats_wbs.gif',
+  default_ex:    'https://en.wikipedia.org/wiki/Special:FilePath/Pushup_wbs.gif'
+};
+
+// SVG fallback (usato solo se l'immagine non carica)
 const SVG = {
   squat:`<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="28" cy="8" r="5" fill="#a78bfa"/>
@@ -669,7 +700,12 @@ function renderTracker(){
 
 function renderExercise(ex,pi,di,ei){
   const key=`${pi}-${di}-${ei}`;
-  const svg=SVG[ex.svg]||SVG.default_ex;
+  // Usa immagine reale Wikimedia, con fallback all'SVG se non carica
+  const imgUrl=IMGS[ex.svg]||IMGS.default_ex;
+  const svgFallback=SVG[ex.svg]||SVG.default_ex;
+  const imgHtml=`<img src="${imgUrl}" alt="${ex.n}" style="width:68px;height:68px;object-fit:contain;"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div style="display:none;width:68px;height:68px;align-items:center;justify-content:center">${svgFallback}</div>`;
   const sd=serDone[pi][di][ei]||[];
   const sets=ex.sets;
   const allDone=sd.filter(Boolean).length>=sets;
@@ -691,7 +727,7 @@ function renderExercise(ex,pi,di,ei){
 
   return`<div class="ecard" id="ec-${key}">
     <div class="ecard-header" onclick="toggleEx('${key}')">
-      <div class="esvg">${svg}</div>
+      <div class="esvg">${imgHtml}</div>
       <div class="einfo">
         <div class="ename">${ex.n}</div>
         <div class="emeta">
