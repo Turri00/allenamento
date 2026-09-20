@@ -248,10 +248,10 @@ body{font-family:'Patrick Hand',cursive;background:#fff;color:var(--ink);font-si
 
 /* NAV */
 .nav-row{display:flex;gap:8px}
-.nb-wrap{flex:1;cursor:pointer;padding:8px 8px;text-align:center;
-  border:1px solid #d8d8d8;border-radius:4px 14px 12px 14px;
-  background:#f6f6f6;filter:url(#sketchy-filter)}
-.nb-text{font-family:'Patrick Hand',cursive;font-size:15px;color:#aaa}
+.nb-wrap{flex:1;cursor:pointer;padding:8px;text-align:center;
+  background:transparent;border:none;filter:none}
+.nb-text{font-family:'Patrick Hand',cursive;font-size:15px;color:#bbb;
+  border-bottom:1px dashed #ccc;display:inline-block;padding-bottom:2px}
 
 /* TOAST */
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
@@ -504,15 +504,9 @@ body{font-family:'Patrick Hand',cursive;background:#fff;color:var(--ink);font-si
   <div id="footer">
     <div class="nav-row">
       <div class="nb-wrap" id="btnP" onclick="goAdj(-1)">
-        <svg class="nbbg" viewBox="0 0 150 44" preserveAspectRatio="none" fill="none">
-          <path d="M3 7 C4 2,10 2,20 2 C55 2,100 2,128 3 C138 3,146 7,147 13 C148 22,147 30,147 36 C147 41,141 42,130 42 C98 42,48 41,20 40 C10 40,2 37,2 31 C2 20,2 12,3 7 Z" stroke="#b8a060" stroke-width="1.6" fill="rgba(255,253,240,.9)"/>
-        </svg>
         <div class="nb-text">← Prec.</div>
       </div>
       <div class="nb-wrap" id="btnN" onclick="goAdj(1)">
-        <svg class="nbbg" viewBox="0 0 150 44" preserveAspectRatio="none" fill="none">
-          <path d="M3 8 C4 2,10 2,20 2 C55 2,100 2,128 3 C139 3,147 7,148 14 C149 24,147 32,147 38 C147 42,140 43,129 42 C97 42,46 41,20 40 C10 40,2 36,2 30 C2 20,2 14,3 8 Z" stroke="#b8a060" stroke-width="1.6" fill="rgba(255,253,240,.9)"/>
-        </svg>
         <div class="nb-text">Succ. →</div>
       </div>
     </div>
