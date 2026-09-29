@@ -985,9 +985,11 @@ function emptySerDone(){
   );
 }
 
-let startDate=localStorage.getItem(KEYS.startDate)||null; // null = non impostata
-let completed=JSON.parse(localStorage.getItem(KEYS.completed)||'null')||emptyCompleted();
-let serDone=JSON.parse(localStorage.getItem(KEYS.serDone)||'null')||emptySerDone();
+// Lettura difensiva: alcuni browser mobile (modalità privata) bloccano localStorage
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+let startDate=lsGet(KEYS.startDate)||null; // null = non impostata
+let completed=(()=>{try{return JSON.parse(lsGet(KEYS.completed)||'null');}catch(e){return null;}})()||emptyCompleted();
+let serDone=(()=>{try{return JSON.parse(lsGet(KEYS.serDone)||'null');}catch(e){return null;}})()||emptySerDone();
 
 // Calcola fase e settimana corrente dalla data di inizio
 function calcCurrentWeek(){
